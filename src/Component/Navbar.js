@@ -7,6 +7,7 @@ function Navbar() {
     
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
+    const [navbar, setNavbar] = useState(false);
 
     const handleClick = () => {
         setClick(!click);
@@ -24,6 +25,15 @@ function Navbar() {
         }
     };
 
+    const changeBackground = () => {
+        if(window.scrollY >= 80) {
+            setNavbar(true);
+        } else
+            setNavbar(false); 
+    };
+
+    window.addEventListener('scroll', changeBackground);
+
     useEffect(() => {
         showButton();
     }, []) 
@@ -32,7 +42,7 @@ function Navbar() {
 
     return (
         <>
-            <nav className="navbar">
+            <nav className={navbar ? 'navbar active' : 'navbar'}>
                 <div className="navbar-container">
                     <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
                         HOAXTRIP <i className="fab fa-typo3" />
